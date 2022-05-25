@@ -2,6 +2,10 @@
 
 After realizing an API I was using did not have access to wins or standings, I developed this app as a module to include in my other NBA data project.
 
+## Screenshots
+
+<img src = "./assets/site-screenshot.png" height=300 width=500 />
+
 ## Installation
 
 1. `git clone` the repository
