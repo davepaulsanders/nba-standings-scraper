@@ -5,7 +5,7 @@ const getStandings = async () => {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
     await page.goto("https://www.cbssports.com/nba/standings/");
-    
+
     // Getting teams from CBS
     let teams = await page.$$eval("span a", (teams) =>
       teams.map((team) => {
@@ -29,8 +29,20 @@ const getStandings = async () => {
     });
 
     // These values could also be returned as a module
-    console.log(Eastern);
-    console.log(Western);
+    console.log(`
+    ===========================================================================
+    _   ______  ___       ______________    _   ______  _____   _____________
+    / | / / __ )/   |     / ___/_  __/   |  / | / / __ \/  _/ | / / ____/ ___/
+   /  |/ / __  / /| |     \__ \ / / / /| | /  |/ / / / // //  |/ / / __ \__ \ 
+  / /|  / /_/ / ___ |    ___/ // / / ___ |/ /|  / /_/ // // /|  / /_/ /___/ / 
+ /_/ |_/_____/_/  |_|   /____//_/ /_/  |_/_/ |_/_____/___/_/ |_/\____//____/ 
+ 
+==========================================================================`);
+
+    console.log(`=============== EASTERN ===============`)
+    Eastern.forEach(team => console.log(team))
+    console.log(`=============== WESTERN ===============`)
+    Western.forEach(team => console.log(team))
   } catch (e) {
     console.log(e.message);
   }
