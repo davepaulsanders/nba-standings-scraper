@@ -1,7 +1,7 @@
 const puppeteer = require("puppeteer");
 
-const getStandings = async () => {
-  console.log(`Getting NBA Standings.....`)
+const getNBAStandings = async () => {
+  console.log(`Getting NBA Standings.....`);
   try {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
@@ -14,13 +14,12 @@ const getStandings = async () => {
       })
     );
 
+    //let wins = await page.$$eval('#TableBase-1 > div > div > table > tbody > tr:nth-child(1) > td:nth-child(3)' , (wins) =>  wins);
     await browser.close();
 
     // removing extra data included during selection
-    teams = teams.filter(
-      (team) => team !== ""
-    );
-
+    teams = teams.filter((team) => team !== "");
+    //console.log(wins);
     // splitting into conferences and adding number ranking
     const Eastern = teams.splice(0, 15).map((team, index) => {
       return `${index + 1}: ${team}`;
@@ -28,27 +27,27 @@ const getStandings = async () => {
     const Western = teams.splice(0, 15).map((team, index) => {
       return `${index + 1}: ${team}`;
     });
-
+    const conferenceStandings = { Eastern, Western };
+    return conferenceStandings;
     // These values could also be returned as a module
     console.log(`
-==================================================================================================
-    
-███╗░░██╗██████╗░░█████╗░  ░██████╗████████╗░█████╗░███╗░░██╗██████╗░██╗███╗░░██╗░██████╗░░██████╗
-████╗░██║██╔══██╗██╔══██╗  ██╔════╝╚══██╔══╝██╔══██╗████╗░██║██╔══██╗██║████╗░██║██╔════╝░██╔════╝
-██╔██╗██║██████╦╝███████║  ╚█████╗░░░░██║░░░███████║██╔██╗██║██║░░██║██║██╔██╗██║██║░░██╗░╚█████╗░
-██║╚████║██╔══██╗██╔══██║  ░╚═══██╗░░░██║░░░██╔══██║██║╚████║██║░░██║██║██║╚████║██║░░╚██╗░╚═══██╗
-██║░╚███║██████╦╝██║░░██║  ██████╔╝░░░██║░░░██║░░██║██║░╚███║██████╔╝██║██║░╚███║╚██████╔╝██████╔╝
-╚═╝░░╚══╝╚═════╝░╚═╝░░╚═╝  ╚═════╝░░░░╚═╝░░░╚═╝░░╚═╝╚═╝░░╚══╝╚═════╝░╚═╝╚═╝░░╚══╝░╚═════╝░╚═════╝░
- 
-==================================================================================================`);
+    ==================================================================================================
 
-    console.log(`=============== EASTERN ===============`)
-    Eastern.forEach(team => console.log(team))
-    console.log(`=============== WESTERN ===============`)
-    Western.forEach(team => console.log(team))
+    ███╗░░██╗██████╗░░█████╗░  ░██████╗████████╗░█████╗░███╗░░██╗██████╗░██╗███╗░░██╗░██████╗░░██████╗
+    ████╗░██║██╔══██╗██╔══██╗  ██╔════╝╚══██╔══╝██╔══██╗████╗░██║██╔══██╗██║████╗░██║██╔════╝░██╔════╝
+    ██╔██╗██║██████╦╝███████║  ╚█████╗░░░░██║░░░███████║██╔██╗██║██║░░██║██║██╔██╗██║██║░░██╗░╚█████╗░
+    ██║╚████║██╔══██╗██╔══██║  ░╚═══██╗░░░██║░░░██╔══██║██║╚████║██║░░██║██║██║╚████║██║░░╚██╗░╚═══██╗
+    ██║░╚███║██████╦╝██║░░██║  ██████╔╝░░░██║░░░██║░░██║██║░╚███║██████╔╝██║██║░╚███║╚██████╔╝██████╔╝
+    ╚═╝░░╚══╝╚═════╝░╚═╝░░╚═╝  ╚═════╝░░░░╚═╝░░░╚═╝░░╚═╝╚═╝░░╚══╝╚═════╝░╚═╝╚═╝░░╚══╝░╚═════╝░╚═════╝░
+
+    ==================================================================================================`);
+
+    console.log(`=============== EASTERN ===============`);
+    Eastern.forEach((team) => console.log(team));
+    console.log(`=============== WESTERN ===============`);
+    Western.forEach((team) => console.log(team));
   } catch (e) {
     console.log(e.message);
   }
 };
-
-getStandings();
+module.exports = getNBAStandings;
