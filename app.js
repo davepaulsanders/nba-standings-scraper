@@ -1,6 +1,6 @@
 const puppeteer = require("puppeteer");
 
-const getNBAStandings = async () => {
+async function getNBAStandings() {
   console.log(`Getting NBA Standings.....`);
   try {
     const browser = await puppeteer.launch();
@@ -49,5 +49,5 @@ const getNBAStandings = async () => {
   } catch (e) {
     console.log(e.message);
   }
-};
+}
 module.exports = getNBAStandings;
