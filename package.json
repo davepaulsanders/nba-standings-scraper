@@ -10,6 +10,6 @@
   "author": "David Sanders",
   "license": "ISC",
   "dependencies": {
-    "puppeteer": "^14.1.1"
+    "puppeteer": "^15.5.0"
   }
 }
